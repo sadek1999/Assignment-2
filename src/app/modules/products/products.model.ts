@@ -14,7 +14,7 @@ const inventorySchema=new Schema<TInventory>({
 
 
 const productsSchema = new Schema< TProducts>({
-    name:{Type:String,required:true},
+    name:{type:String,required:true},
     description:{type:String,required:true},
     price:{type:Number,required:true},
     category:{type:String,required:true},
@@ -25,4 +25,4 @@ const productsSchema = new Schema< TProducts>({
 })
 
 
-const product =model<TProducts>('product',productsSchema)
+export const product =model<TProducts>('product',productsSchema)
