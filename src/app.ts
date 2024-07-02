@@ -1,9 +1,12 @@
-import express from 'express'
-const app = express()
-const port = 3000
+import express, { Application } from "express";
+import router from "./app/router";
+const app:Application = express();
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+
+app.use("api/v1", router)
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
 
 export default app;
