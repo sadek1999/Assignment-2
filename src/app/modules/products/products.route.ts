@@ -8,7 +8,7 @@ import validatedRequest from '../middlewares/validateRequest';
 const router=express.Router()
 
 
-router.post('/products',validatedRequest(productsValidationSchema),productsCollections.createProduct)
+router.post('/',validatedRequest(productsValidationSchema),productsCollections.createProduct)
 router.get('/',productsCollections.getAllProducts)
 router.get("/:productID",productsCollections.getSingleProductById)
 router.patch('/:productID',productsCollections.updateProductById)

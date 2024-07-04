@@ -1,7 +1,7 @@
 
 import { TProducts } from "./products.interface";
 import { product } from "./products.model";
-import { Request } from 'express';
+
 
 
 
@@ -12,7 +12,8 @@ const createProductIntoDB=async(payload:TProducts)=>{
     
 }
 
-const getAllProductsFromDB=async()=>{
+const getAllProductsFromDB=async(payload:Record<string|undefined>)=>{
+    console.log(payload)
     const result=await product.find()
     return result
 }

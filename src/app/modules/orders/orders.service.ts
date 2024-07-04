@@ -7,6 +7,15 @@ const creteOrderIntoDB=async(payload:TOrders)=>{
   return result
 }
 
+const getAllOrdersFromDB=async()=>{
+    const result=await order.find()
+    return result
+}
+
+
+
 export const orderServices={
     creteOrderIntoDB,
+    getAllOrdersFromDB,
+    
 }

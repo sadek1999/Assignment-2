@@ -13,7 +13,7 @@ app.use(cors());
 
 
 
-app.use('/api',productsRoutes)
+app.use('/api/products',productsRoutes)
 app.use('/api/orders',orderRoute)
 
 
