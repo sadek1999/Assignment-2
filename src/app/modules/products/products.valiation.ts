@@ -21,6 +21,7 @@ const inventorySchema = z.object({
         category: z.string().nonempty({ message: "Category is required" }),
         tags: z.array(z.string()).nonempty({ message: "Tags must contain at least one tag" }),
         variants: z.array(variantsSchema).nonempty({ message: "Variants must contain at least one variant" }),
-        inventory: inventorySchema
+        inventory: inventorySchema,
+        isDeleted:z.boolean()
     })
  })

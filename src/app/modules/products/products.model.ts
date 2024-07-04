@@ -2,9 +2,11 @@ import { Schema, model } from "mongoose";
 import { TInventory, TProducts, TVariants } from "./products.interface";
 
 
+
 const variantsSchema=new Schema<TVariants>({
     type:{type:String,required:true},
     value:{type:String,required:true}
+    
 })
 
 const inventorySchema=new Schema<TInventory>({
@@ -21,8 +23,9 @@ const productsSchema = new Schema< TProducts>({
     tags:{type:[String],required:true},
     variants:[variantsSchema],
     inventory:inventorySchema,
+    isDeleted:{type:Boolean,required:true}
 
-})
+},{timestamps:true})
 
 
 export const product =model<TProducts>('product',productsSchema)

@@ -19,6 +19,7 @@ export type TProducts={
   tags:string[],
   variants:TVariants[],
   inventory:TInventory,
+  isDeleted:boolean,
 
 
 }
