@@ -7,8 +7,13 @@ const creteOrderIntoDB=async(payload:TOrders)=>{
   return result
 }
 
-const getAllOrdersFromDB=async()=>{
-    const result=await order.find()
+const getAllOrdersFromDB=async(payload:string)=>{
+  
+  let query=''
+  if(payload?.email){
+    query={email:payload.email}
+  }
+    const result=await order.find(query)
     return result
 }
 

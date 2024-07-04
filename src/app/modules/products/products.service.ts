@@ -12,8 +12,13 @@ const createProductIntoDB=async(payload:TProducts)=>{
     
 }
 
-const getAllProductsFromDB=async(payload:Record<string|undefined>)=>{
-    console.log(payload)
+const getAllProductsFromDB=async(payload:any)=>{
+    // console.log(payload)
+    let searchTerm=''
+    if(payload?.searchTerm){
+        searchTerm=payload.searchTerm
+        console.log(searchTerm)
+    }
     const result=await product.find()
     return result
 }

@@ -10,7 +10,7 @@ const router=express.Router()
 
 router.post('/',validatedRequest(orderValidationSchema),orderController.createOrders)
 
-router.get("/",orderController.getAllOrders)
+router.get("/get",orderController.getAllOrders)
 
 // router.get('/',async(req,res)=>{res.send('okkkk')})
 
