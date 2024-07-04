@@ -15,10 +15,17 @@ const getAllProductsFromDB=async()=>{
     const result=await product.find()
     return result
 }
+
+const getSingleProductFromBD=async(id:string)=>{
+    const result=await product.findById(id)
+    return result
+
+}
   
 
 
 export const productServices={
     createProductIntoDB,
     getAllProductsFromDB,
+    getSingleProductFromBD,
 }

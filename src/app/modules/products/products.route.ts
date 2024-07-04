@@ -10,6 +10,7 @@ const router=express.Router()
 
 router.post('/products',validatedRequest(productsValidationSchema),productsCollections.createProduct)
 router.get('/',productsCollections.getAllProducts)
+router.get("/:productID",productsCollections.getSingleProductById)
 // router.post('/products',productsCollections.test)
 
 

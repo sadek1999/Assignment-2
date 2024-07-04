@@ -1,24 +1,25 @@
-import eslint from "@eslint/js";
-import tseslint from "typescript-eslint";
+import eslint from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import globals from 'globals'
 
 export default tseslint.config(
-  {
-    rules: {
-      "no-unused-vars": "error",
-      "no-console": "warn",
-      "no-undef": "error",
-      "no-unused-expressions": "error",
-      "prefer-const": "error",
+    {    ignores:["**/node_modules/", ".git/"],
+        languageOptions: {
+            globals: {
+                ...globals.node
+            }
+        }
     },
-  },
-  {
-    ignores: ["**/node_modules/", "**/dist/"],
-    languageOptions: {
-      globals: {
-        ...globals.node,
-      },
+
+    {
+        rules: {
+            "no-unused-vars": "error",
+            "no-console":'warn',
+            "no-undef":"error",
+            "no-unused-expressions": "error",
+           "prefer-const": "error"
+        }
     },
-  },
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
 );
