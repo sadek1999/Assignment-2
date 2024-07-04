@@ -1,16 +1,29 @@
 import express, { Application } from "express";
+import cors from "cors";
 
-import { productsCollections } from "./app/modules/products/products.collection";
 import { productsRoutes } from "./app/modules/products/products.route";
+import { globalErrorHandler } from "./app/modules/middlewares/globalErrorHandler";
+import { notFound } from "./app/modules/middlewares/notFound";
 const app:Application = express();
 
 
+app.use(express.json());
+app.use(cors());
 
-app.use('/api/v1',productsRoutes)
+
+
+app.use('/api',productsRoutes)
 
 
 app.get("/", (req, res) => {
   res.send("Hello World!kkkk");
 });
+
+// app.post("/data",async(req,res)=>{
+//   console.log(req.body)
+//   res.send("hi>......")
+// })
+app.use(globalErrorHandler)
+app.use(notFound)
 
 export default app;
