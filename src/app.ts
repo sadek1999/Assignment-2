@@ -4,6 +4,7 @@ import cors from "cors";
 import { productsRoutes } from "./app/modules/products/products.route";
 import { globalErrorHandler } from "./app/modules/middlewares/globalErrorHandler";
 import { notFound } from "./app/modules/middlewares/notFound";
+import { orderRoute } from "./app/modules/orders/orders.route";
 const app:Application = express();
 
 
@@ -13,6 +14,7 @@ app.use(cors());
 
 
 app.use('/api',productsRoutes)
+app.use('/api/orders',orderRoute)
 
 
 app.get("/", (req, res) => {
