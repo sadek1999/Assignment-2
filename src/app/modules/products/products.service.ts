@@ -29,14 +29,16 @@ const getSingleProductFromBD=async(id:string)=>{
 
 }
 const updateProductsIntoDB=async(id:string,payload:Partial<TProducts>)=>{
-    // console.log(payload,id)
-  const result=await product.findByIdAndUpdate({id},payload,{new:true})
+    console.log(payload,id)
+  const result=await product.findByIdAndUpdate({_id:id},payload,{new:true})
+//   const result=await product.findOneAndUpdate({id})
   return result;
 }
 
 const DeleteSingleProductIntoDB=async(id:string)=>{
-    console.log(id)
-    const result=await product.updateOne({id},{isDeleted:true})
+    // console.log(id)
+    // const result=await product.updateOne({id},{isDeleted:true})
+    const result=await product.findByIdAndDelete({_id:id})
     return result
 }
   
