@@ -12,13 +12,9 @@ const createProductIntoDB=async(payload:TProducts)=>{
     
 }
 
-const getAllProductsFromDB=async(payload:any)=>{
-    // console.log(payload)
-    let searchTerm=''
-    if(payload?.searchTerm){
-        searchTerm=payload.searchTerm
-        console.log(searchTerm)
-    }
+const getAllProductsFromDB=async()=>{
+    
+   
     const result=await product.find()
     return result
 }
@@ -29,7 +25,7 @@ const getSingleProductFromBD=async(id:string)=>{
 
 }
 const updateProductsIntoDB=async(id:string,payload:Partial<TProducts>)=>{
-    console.log(payload,id)
+    // console.log(payload,id)
   const result=await product.findByIdAndUpdate({_id:id},payload,{new:true})
 //   const result=await product.findOneAndUpdate({id})
   return result;

@@ -1,60 +1,66 @@
-import { productsCollections } from "../products/products.collection"
-import { productServices } from "../products/products.service"
-import { TOrders } from "./orders.interface"
-import { order } from "./orders.model"
+import { productsCollections } from "../products/products.collection";
+import { productServices } from "../products/products.service";
+import { TOrders } from "./orders.interface";
+import { order } from "./orders.model";
 
-
-const creteOrderIntoDB=async(payload:TOrders)=>{
+const creteOrderIntoDB = async (payload: TOrders) => {
   // console.log(payload)
-  const{productId,quantity}=payload
+  const { productId, quantity } = payload;
 
-  const product=await productServices.getSingleProductFromBD(productId)
+  const product = await productServices.getSingleProductFromBD(productId);
   // console.log(product.inventory)
 
-  if(product?.inventory.quantity >=1){
-    if(product?.inventory.quantity >= quantity){
-      console.log(productId)
-      const q=product?.inventory.quantity-payload.quantity
-      const up={
-        inventory:{
-          quantity :q
+  if (product?.inventory.quantity >= 1) {
+    if (product?.inventory.quantity >= quantity) {
+      console.log(productId);
+
+      const q = product?.inventory.quantity - payload.quantity;
+      const up = {
+        inventory: {
+          quantity: q,
+          inStock: true,
+        },
+      };
+      console.log(q);
+      const update = await productServices.updateProductsIntoDB(productId, up);
+      if (product?.inventory.inStock) {
+        console.log("form inStock")
+        if (product?.inventory.quantity == 0) {
+          const up = {
+            inventory: {
+              quantity: q,
+              inStock: false,
+            },
+          };
+          const update = await productServices.updateProductsIntoDB(
+            productId,
+            up
+          );
         }
       }
-      console.log(q)
-      const update =await productServices.updateProductsIntoDB(productId,up)
-      // console.log(updata)
 
-     const result=await order.create(payload)
-  
-    //  cosnt update =await productServices.updateProductsIntoDB(productId,data)
+      const result = await order.create(payload);
 
+      //  cosnt update =await productServices.updateProductsIntoDB(productId,data)
 
-     return result
-    }
-    else{
-      const result="Products are not available"
-      return result
+      return result;
+    } else {
+      throw new Error("Insufficient quantity available in inventory")
     }
   }
-  
- 
-}
+};
 
-const getAllOrdersFromDB=async(payload:string)=>{
-  
-  let query=null
-  if(payload?.email){
-    query={email:payload.email}
+const getAllOrdersFromDB = async (payload: string) => {
+  let query = null;
+  if (payload?.email) {
+    query = { email: payload.email };
   }
   // console.log(query)
-    const result=await order.find(query)
-    return result
-}
+  const result = await order.find(query);
+  return result;
+};
 
-
-
-export const orderServices={
-    creteOrderIntoDB,
-    getAllOrdersFromDB,
-    
-}
+export const orderServices = {
+  creteOrderIntoDB,
+  getAllOrdersFromDB,
+};
