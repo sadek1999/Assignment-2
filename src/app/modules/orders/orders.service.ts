@@ -1,18 +1,19 @@
-import { productsCollections } from "../products/products.collection";
+
+
 import { productServices } from "../products/products.service";
 import { TOrders } from "./orders.interface";
 import { order } from "./orders.model";
 
 const creteOrderIntoDB = async (payload: TOrders) => {
-  // console.log(payload)
+  
   const { productId, quantity } = payload;
 
   const product = await productServices.getSingleProductFromBD(productId);
-  // console.log(product.inventory)
-
+  
+ if(product?.inventory.quantity){
   if (product?.inventory.quantity >= 1) {
     if (product?.inventory.quantity >= quantity) {
-      console.log(productId);
+      // console.log(productId);
 
       const q = product?.inventory.quantity - payload.quantity;
       const up = {
@@ -21,7 +22,7 @@ const creteOrderIntoDB = async (payload: TOrders) => {
           inStock: true,
         },
       };
-      console.log(q);
+      // console.log(q);
       const update = await productServices.updateProductsIntoDB(productId, up);
       if (product?.inventory.inStock) {
         console.log("form inStock")
@@ -48,12 +49,17 @@ const creteOrderIntoDB = async (payload: TOrders) => {
       throw new Error("Insufficient quantity available in inventory")
     }
   }
+ }
+ 
 };
 
-const getAllOrdersFromDB = async (payload: string) => {
+const getAllOrdersFromDB = async (payload: any) => {
   let query = null;
-  if (payload?.email) {
+  
+  if (payload?.email ) {
     query = { email: payload.email };
+  }else{
+    query={}
   }
   // console.log(query)
   const result = await order.find(query);

@@ -3,7 +3,7 @@ import { productServices } from "./products.service";
 import catchAsync from "../../utility/catchAsync";
 import sendResponse from "../../utility/sendRespose";
 import httpStatus from "http-status";
-import { product } from './products.model';
+
 
 const createProduct = async (
   req: Request,
@@ -26,7 +26,7 @@ const createProduct = async (
 const getAllProducts = catchAsync(async (req: Request, res: Response) => {
 
   // console.log(req.query)
-  const result = await productServices.getAllProductsFromDB(req.query);
+  const result = await productServices.getAllProductsFromDB();
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,

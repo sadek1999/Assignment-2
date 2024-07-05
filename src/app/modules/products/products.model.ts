@@ -23,7 +23,7 @@ const productsSchema = new Schema< TProducts>({
     tags:{type:[String],required:true},
     variants:[variantsSchema],
     inventory:inventorySchema,
-    isDeleted:{type:Boolean,required:true}
+    
 
 },{timestamps:true})
 

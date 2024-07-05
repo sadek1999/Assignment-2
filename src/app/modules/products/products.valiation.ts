@@ -24,6 +24,6 @@ const inventorySchema = z.object({
         tags: z.array(z.string()).nonempty({ message: "Tags must contain at least one tag" }),
         variants: z.array(variantsSchema).nonempty({ message: "Variants must contain at least one variant" }),
         inventory: inventorySchema,
-        isDeleted: z.boolean({ required_error: "isDeleted status is required" })
+        
       }),
     })

@@ -1,8 +1,9 @@
 
-import  express, { Request, Response }  from 'express';
+
 import { productsCollections } from './products.collection';
 import { productsValidationSchema } from './products.valiation';
 import validatedRequest from '../middlewares/validateRequest';
+import  express  from 'express';
 
 
 const router=express.Router()
